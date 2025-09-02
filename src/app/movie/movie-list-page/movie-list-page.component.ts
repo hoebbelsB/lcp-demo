@@ -22,8 +22,12 @@ import { MovieListComponent } from '../movie-list/movie-list.component';
     @let movieData = movies();
     @if (movieData) {
       <h1>{{ title() }}</h1>
-      <movie-list [movies]="movieData" />
-      <div (elementVisible)="paginate$.next()"></div>
+      @defer (on viewport) {
+        <movie-list [movies]="movieData" />
+        <div (elementVisible)="paginate$.next()"></div>
+      } @placeholder {
+        <div class="loader"></div>
+      }
     }
   `,
   imports: [MovieListComponent, ElementVisibilityDirective],

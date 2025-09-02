@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { MovieDetailPageComponent } from './movie/movie-detail-page/movie-detail-page.component';
 import { MovieListPageComponent } from './movie/movie-list-page/movie-list-page.component';
-import { MovieSearchPageComponent } from './movie/movie-search-page/movie-search-page.component';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   {
@@ -12,11 +9,17 @@ export const routes: Routes = [
   },
   {
     path: 'movie/:id',
-    component: MovieDetailPageComponent,
+    loadComponent: () =>
+      import('./movie/movie-detail-page/movie-detail-page.component').then(
+        (m) => m.MovieDetailPageComponent,
+      ),
   },
   {
     path: 'search/:query',
-    component: MovieSearchPageComponent,
+    loadComponent: () =>
+      import('./movie/movie-search-page/movie-search-page.component').then(
+        (m) => m.MovieSearchPageComponent,
+      ),
   },
   {
     path: '',
@@ -25,6 +28,9 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundPageComponent,
+    loadComponent: () =>
+      import('./not-found-page/not-found-page.component').then(
+        (m) => m.NotFoundPageComponent,
+      ),
   },
 ];

@@ -134,7 +134,11 @@ import { MovieListComponent } from '../movie-list/movie-list.component';
         <h2>Movies</h2>
       </header>
       @if (recommendations$ | async; as recommendations) {
-        <movie-list [movies]="recommendations!" />
+        @defer (on viewport) {
+          <movie-list [movies]="recommendations!" />
+        } @placeholder {
+          <div class="loader"></div>
+        }
       } @else {
         <div class="loader"></div>
       }
