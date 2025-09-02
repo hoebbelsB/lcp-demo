@@ -5,11 +5,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <img
       class="banner-image"
-      src="/assets/images/lcp-banner_large.jpg"
-      fetchpriority="high"
+      src="/assets/images/lcp-banner_small.jpg"
+      sizes="100vw"
+      srcset="
+        /assets/images/lcp-banner_small.jpg   800w,
+        /assets/images/lcp-banner_medium.jpg 1500w,
+        /assets/images/lcp-banner_large.jpg  2500w
+      "
       alt=""
       width="200"
       height="109"
+      fetchpriority="high"
     />
     <h1 class="banner-heading">A Movie App</h1>
   `,
