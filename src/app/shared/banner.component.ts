@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <img
       class="banner-image"
       src="/assets/images/lcp-banner_large.jpg"
-      loading="lazy"
+      fetchpriority="high"
       alt=""
       width="200"
       height="109"
