@@ -29,4 +29,26 @@ export class AppComponent {
       map((url) => url.includes('list')),
     ),
   );
+
+  constructor() {
+    const lcpObserver = new PerformanceObserver((events) => {
+      console.log(events.getEntries());
+      if (events.getEntries().length > 0) {
+        const gtmScript = document.createElement('script');
+
+        gtmScript.text = `
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PTJVTDBF');`;
+
+        gtmScript.type = 'text/javascript';
+        document.head.appendChild(gtmScript);
+        lcpObserver.disconnect();
+      }
+    });
+
+    lcpObserver.observe({ type: 'largest-contentful-paint', buffered: false });
+  }
 }
